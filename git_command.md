@@ -1,3 +1,4 @@
+```bash
 # Check current branch name & status
 git status
 
@@ -14,7 +15,10 @@ git status
 git add .
 
 # Commit changes
-git commit -m "your commit message"
+git commit
+
+# Press Key
+# Ctrl + o, enter, Ctrl + x
 
 # Push branch to GitHub
 git push origin new-branch-name
@@ -26,7 +30,7 @@ git checkout main
 
 # Pull latest changes from remote
 git pull origin main
-
+```
 -------------------------------------------------------------
 
 if we are in main branch  
