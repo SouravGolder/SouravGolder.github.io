@@ -13,9 +13,14 @@ Transform your boring terminal into a powerful, beautiful, and highly productive
 - [Step 5: Install Essential Plugins](#step-5-install-essential-plugins)
   - [Zsh Autosuggestions](#zsh-autosuggestions)
   - [Zsh Syntax Highlighting](#zsh-syntax-highlighting)
+  - [Configure Plugins](#configure-plugins)
 - [Step 6: Install Powerlevel10k Theme](#step-6-install-powerlevel10k-theme)
-- [Step 7: Install Font Awesome](#step-7-install-font-awesome)
-- [Step 8: Final Touches](#step-8-final-touches)
+  - [Apply Theme](#apply-theme)
+- [Step 7: Install Nerd Fonts and Awesome Fonts](#step-7-install-nerd-fonts-and-awesome-fonts)
+  - [Install Meslo Nerd Font](#step-7a-install-meslo-nerd-font)
+  - [Install Font Awesome UI Icons](#step-7b-install-font-awesome-ui-icons)
+  - [Editor (VS Code, Antigravity) Preferences Setup](#step-7c-editor-vs-code-antigravity-preferences-setup)
+- [Step 8: Final Touches](#-step-8-final-touches)
 
 ---
 
@@ -74,7 +79,7 @@ It provides syntax highlighting for the Zsh shell. It helps in catching syntax e
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 ```
 
-#### ⚙️ Configure Plugins
+#### Configure Plugins
 Open your `.zshrc` file:
 ```bash
 nano ~/.zshrc
@@ -86,7 +91,7 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
 ---
 
-## 🎨 Aesthetics: Themes & Fonts
+## 🎨 Aesthetics Themes
 
 ### Step 6: Install Powerlevel10k Theme
 Powerlevel10k is a theme for Zsh that emphasizes speed, flexibility, and out-of-the-box experience.
@@ -94,7 +99,7 @@ Powerlevel10k is a theme for Zsh that emphasizes speed, flexibility, and out-of-
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 ```
 
-#### ⚙️ Apply Theme
+#### Apply Theme
 Open your `.zshrc` file again:
 ```bash
 nano ~/.zshrc
@@ -103,13 +108,49 @@ Change the `ZSH_THEME` line to:
 ```bash
 ZSH_THEME="powerlevel10k/powerlevel10k"
 ```
+---
 
-### Step 7: Install Font Awesome
+## 🔥 Fonts & UI Icons
+
+### Step 7: Install Nerd Fonts and Awesome Fonts
+- To enable icons and glyphs in your terminal (Zsh, Oh My Zsh, Powerlevel10k), install a Nerd Font.  
+- Web/UI tools rely on Font Awesome icons  
+- ✔ **Installing both ensures maximum compatibility** across tools
+
+#### Step 7A: Install Meslo Nerd Font
+
+```bash
+# Create fonts directory (if not exists)
+mkdir -p ~/.local/share/fonts
+
+# Move into fonts directory
+cd ~/.local/share/fonts
+
+# Download Meslo Nerd Font
+wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Meslo.zip
+
+# Extract the font package
+unzip Meslo.zip
+
+# Refresh font cache
+fc-cache -fv
+```
+
+
+#### Step 7B: Install Font Awesome UI Icons
 For the icons to render correctly in Powerlevel10k.
 ```bash
 sudo apt install -y fonts-font-awesome
 ```
 
+#### Step 7C: Editor (VS code, Antigravity) Preferences Setup 
+
+- Open Preferences using `Ctrl + Shift + P`
+- Search and select **Open User Settings (JSON)**
+- Add this configuration:
+```json
+"terminal.integrated.fontFamily": "MesloLGS Nerd Font Mono"
+```
 ---
 
 ## ✨ Step 8: Final Touches
