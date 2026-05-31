@@ -88,7 +88,10 @@ Find the `plugins=(...)` line and replace it with:
 ```bash
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 ```
-
+Remove Comment (#) from this line: 
+```bash
+export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
+```
 ---
 
 ## 🎨 Aesthetics Themes
