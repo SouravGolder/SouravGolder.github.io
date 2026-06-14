@@ -1,91 +1,826 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Sourav Golder | Portfolio</title>
+    <title>Sourav Golder | Robotics & AI Systems Portfolio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Academic portfolio of Sourav Golder - Deep Learning Researcher & Systems Developer from RUET. Specializing in Hyperspectral Imaging, Capsule Networks, and Machine Learning.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<!-- HERO SECTION -->
-<section class="hero">
-    <img class="avatar"
-         src="avatar.png"
-         alt="Sourav Golder">
+    <!-- Scanline and Grid Effects -->
+    <div class="hud-scanlines"></div>
+    <div class="hud-grid-overlay"></div>
 
-    <h1>Sourav Golder</h1>
-    <p>Computer Science Graduate | Python | Machine Learning</p>
+    <!-- Neural Network Particle Canvas Background -->
+    <canvas id="neural-canvas"></canvas>
 
-    <div class="links">
-        <a href="https://github.com/SouravGolder" target="_blank">GitHub</a>
-        <a href="mailto:souravgolder@gmail.com">Email</a>
-    </div>
-</section>
-
-<!-- ABOUT -->
-<section class="about">
-    <h2>About Me</h2>
-    <p>
-        I am a Computer Science graduate with strong interest in Machine Learning,
-        Computer Vision, and Software Development. I enjoy building practical
-        projects and continuously improving my skills.
-    </p>
-</section>
-
-<!-- PROJECTS -->
-<section class="projects">
-    <h2>Projects</h2>
-
-    <div class="project-grid">
-
-        <div class="card">
-            <h3>Hyperspectral Image Classification</h3>
-            <p>
-                Machine learning project focused on classifying hyperspectral
-                images using feature extraction and classification algorithms.
-            </p>
-            <a href="https://github.com/SouravGolder/Hyperspectral-Image-Classification"
-               target="_blank">View on GitHub</a>
+    <!-- HUD STATUS HEADER -->
+    <header class="hud-header">
+        <div class="hud-logo">
+            <span class="hud-brand">GOLDER_OS</span>
+            <span class="hud-version">v1.2.0</span>
         </div>
-
-        <div class="card">
-            <h3>Quora Similarity Model</h3>
-            <p>
-                NLP project that detects similarity between question pairs using
-                text preprocessing and ML techniques.
-            </p>
-            <a href="https://github.com/SouravGolder/Quora-similarity-model"
-               target="_blank">View on GitHub</a>
+        <div class="hud-stats-group">
+            <div class="hud-stat"><i class="fa-solid fa-microchip text-accent"></i> CPU: <span id="cpu-load">24%</span>
+            </div>
+            <div class="hud-stat"><i class="fa-solid fa-temperature-half text-warn"></i> TEMP: <span
+                    id="cpu-temp">38.6°C</span></div>
+            <div class="hud-stat"><i class="fa-solid fa-server text-accent"></i> MEM: <span id="mem-load">42%</span>
+            </div>
+            <div class="hud-stat"><i class="fa-solid fa-wifi text-green"></i> NET: <span
+                    class="status-dot blinking"></span> ONLINE</div>
         </div>
-
-        <div class="card">
-            <h3>COVID-19 TRMS</h3>
-            <p>
-                Frontend-based tracking and reporting management system designed
-                during the COVID-19 pandemic.
-            </p>
-            <a href="https://github.com/SouravGolder/Covid-19-TRMS"
-               target="_blank">View on GitHub</a>
+        <div class="hud-time-group">
+            <span id="hud-coordinates">LOC: 24.37°N 88.60°E</span> <!-- RUET, Rajshahi Coordinates -->
+            <span id="hud-clock">00:00:00 UTC</span>
         </div>
+    </header>
 
-        <div class="card">
-            <h3>Bkash Flutter App</h3>
-            <p>
-                Mobile application UI inspired by bKash, implemented using
-                Flutter and Kotlin concepts.
-            </p>
-            <a href="https://github.com/SouravGolder/Bkash-flutter"
-               target="_blank">View on GitHub</a>
+    <!-- MAIN CONTAINER -->
+    <main class="main-container">
+
+        <!-- HERO SECTION -->
+        <section class="hero-section" id="home">
+            <div class="cyber-frame-container">
+                <div class="cyber-avatar-wrapper">
+                    <img class="avatar" src="avatar.png" alt="Sourav Golder">
+                    <div class="scanner-line"></div>
+                </div>
+                <!-- Interactive Node Matrix Visual -->
+                <div class="frame-corner top-left"></div>
+                <div class="frame-corner top-right"></div>
+                <div class="frame-corner bottom-left"></div>
+                <div class="frame-corner bottom-right"></div>
+            </div>
+
+            <div class="hero-content">
+                <div class="badge"><i class="fa-solid fa-brain"></i> AI & ROBOTICS ARCHITECT</div>
+                <h1 class="hero-title" data-text="SOURAV GOLDER">SOURAV GOLDER</h1>
+                <p class="hero-subtitle">
+                    Computer Science Graduate from <span class="highlight-text">RUET</span> & Deep Learning Researcher.
+                    Developing next-generation computer vision systems, spatial-spectral capsule networks, and
+                    performance utilities.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#terminal-section" class="btn btn-primary"><i class="fa-solid fa-terminal"></i> Initialize
+                        Shell</a>
+                    <a href="#projects" class="btn btn-outline"><i class="fa-solid fa-folder-open"></i> Browse
+                        Archive</a>
+                </div>
+
+                <div class="social-links">
+                    <a href="https://github.com/SouravGolder" target="_blank" title="GitHub Profile"><i
+                            class="fa-brands fa-github"></i></a>
+                    <a href="https://scholar.google.com" target="_blank" title="Google Scholar"><i
+                            class="fa-solid fa-graduation-cap"></i></a>
+                    <a href="mailto:souravgolder@gmail.com" title="Email Node"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CORE DIAGNOSTICS & SYSTEM TERMINAL (INTERACTIVE CONSOLE) -->
+        <section class="terminal-section" id="terminal-section">
+            <div class="section-header">
+                <h2 class="section-title"><span class="title-index">01//</span> SYSTEM CONSOLE INTERFACE</h2>
+                <p class="section-desc">Query my local database, run diagnostic protocols, or inspect logs in real time.
+                </p>
+            </div>
+
+            <div class="terminal-wrapper">
+                <div class="terminal-header">
+                    <div class="terminal-dots">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <div class="terminal-title">sourav@golder-os: ~</div>
+                    <div class="terminal-status"><i class="fa-solid fa-shield-halved"></i> SECURE // SHELL</div>
+                </div>
+                <div class="terminal-body">
+                    <div id="terminal-output">
+                        <div class="log-line text-dim">GOLDER-OS Kernel v1.2.0-generic (x86_64)</div>
+                        <div class="log-line text-dim">Initializing Cognitive Memory Subsystem... <span
+                                class="text-green">SUCCESS</span></div>
+                        <div class="log-line text-dim">Mapping Research Repositories (RUET, CSE)... <span
+                                class="text-green">SUCCESS</span></div>
+                        <div class="log-line text-accent font-bold">Welcome, user. Terminal session authorized.</div>
+                        <div class="log-line text-dim">Type <span class="text-pink font-bold">help</span> to view all
+                            diagnostic commands, or click the macros below.</div>
+                    </div>
+                    <form id="terminal-form" class="terminal-input-line">
+                        <span class="terminal-prompt">sourav@golder-os:~$</span>
+                        <input type="text" id="terminal-input" autofocus autocomplete="off"
+                            placeholder="type a command...">
+                        <span class="cursor-block"></span>
+                    </form>
+                </div>
+                <div class="terminal-macros">
+                    <span class="macro-label"><i class="fa-solid fa-circle-nodes"></i> QUICK RUN:</span>
+                    <button type="button" class="macro-btn" data-cmd="help"><i class="fa-solid fa-circle-info"></i>
+                        help</button>
+                    <button type="button" class="macro-btn" data-cmd="about"><i class="fa-solid fa-user-astronaut"></i>
+                        about</button>
+                    <button type="button" class="macro-btn" data-cmd="research"><i class="fa-solid fa-atom"></i>
+                        research</button>
+                    <button type="button" class="macro-btn" data-cmd="projects"><i class="fa-solid fa-cubes"></i>
+                        projects</button>
+                    <button type="button" class="macro-btn" data-cmd="skills"><i class="fa-solid fa-gauge-high"></i>
+                        diagnostics</button>
+                    <button type="button" class="macro-btn" data-cmd="clear"><i class="fa-solid fa-trash-can"></i>
+                        clear</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- RESEARCH & PUBLICATIONS SECTION -->
+        <section class="research-section" id="research">
+            <div class="section-header">
+                <h2 class="section-title"><span class="title-index">02//</span> AI & DEEP LEARNING RESEARCH</h2>
+                <p class="section-desc">Academic contributions and neural model development centered around
+                    spatial-spectral intelligence and bio-dynamics.</p>
+            </div>
+
+            <div class="research-grid">
+                <!-- Paper 1 -->
+                <div class="cyber-card research-card">
+                    <div class="card-glow-bg glow-cyan"></div>
+                    <div class="card-header-hud">
+                        <span class="card-tag tag-cyan"><i class="fa-solid fa-brain"></i> CAPSULE NETWORKS</span>
+                        <span class="card-status-ok"><i class="fa-solid fa-circle-check"></i> PUBLISHED</span>
+                    </div>
+                    <h3 class="card-title">2D-Convolutional Capsule Networks with Expectation-Maximization Routing</h3>
+                    <p class="card-excerpt">
+                        Improving the accuracy of Hyperspectral Image (HSI) classification by resolving spatial-spectral
+                        patterns using convolutional capsules and expectation-maximization (EM) routing.
+                    </p>
+                    <div class="card-specs">
+                        <div class="spec-item"><span class="spec-label">Domain:</span> Remote Sensing / Deep Learning
+                        </div>
+                        <div class="spec-item"><span class="spec-label">Focus:</span> Spectral-Spatial Capsules, Routing
+                            Mechanisms</div>
+                        <div class="spec-item"><span class="spec-label">Institution:</span> Rajshahi University of
+                            Engineering & Technology (RUET)</div>
+                    </div>
+                    <div class="card-actions">
+                        <a href="https://github.com/SouravGolder/Hyperspectral-Image-Classification" target="_blank"
+                            class="card-link"><i class="fa-brands fa-github"></i> Repository</a>
+                        <a href="https://scholar.google.com" target="_blank" class="card-link secondary"><i
+                                class="fa-solid fa-file-pdf"></i> Read Paper</a>
+                    </div>
+                </div>
+
+                <!-- Paper 2 -->
+                <div class="cyber-card research-card">
+                    <div class="card-glow-bg glow-pink"></div>
+                    <div class="card-header-hud">
+                        <span class="card-tag tag-pink"><i class="fa-solid fa-microchip"></i> HYBRID
+                            ARCHITECTURES</span>
+                        <span class="card-status-ok"><i class="fa-solid fa-circle-check"></i> RESEARCH</span>
+                    </div>
+                    <h3 class="card-title">Hybrid Convolutional Models for Spatial-Spectral Feature Maps</h3>
+                    <p class="card-excerpt">
+                        Optimizing features in hyperspectral classification by stacking 3D and 2D convolutions to
+                        compress spectral dimensions while preserving spatial coordinates.
+                    </p>
+                    <div class="card-specs">
+                        <div class="spec-item"><span class="spec-label">Domain:</span> Computer Vision / Multi-channel
+                            Sensing</div>
+                        <div class="spec-item"><span class="spec-label">Focus:</span> 3D-2D CNN fusion, Feature
+                            Dimensionality Reduction</div>
+                        <div class="spec-item"><span class="spec-label">Platform:</span> PyTorch / Python GPU Computing
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <a href="https://github.com/SouravGolder/Hyperspectral-Image-Classification" target="_blank"
+                            class="card-link"><i class="fa-brands fa-github"></i> Repository</a>
+                        <a href="https://scholar.google.com" target="_blank" class="card-link secondary"><i
+                                class="fa-solid fa-chart-line"></i> Analytics</a>
+                    </div>
+                </div>
+
+                <!-- Paper 3 -->
+                <div class="cyber-card research-card">
+                    <div class="card-glow-bg glow-green"></div>
+                    <div class="card-header-hud">
+                        <span class="card-tag tag-green"><i class="fa-solid fa-fire-flame-curved"></i> BIO-ENERGY
+                            MODELLING</span>
+                        <span class="card-status-ok"><i class="fa-solid fa-circle-check"></i> CO-AUTHORED</span>
+                    </div>
+                    <h3 class="card-title">Pyrolysis Kinetics & Biofuel Production Potential of Woody Biomass</h3>
+                    <p class="card-excerpt">
+                        Investigating thermal degradation kinetics and biofuel potential of woody biomass models
+                        (Japanese Larch, Ipil Ipil) to determine activation energy profiles.
+                    </p>
+                    <div class="card-specs">
+                        <div class="spec-item"><span class="spec-label">Domain:</span> Environmental Systems /
+                            Bio-Computing</div>
+                        <div class="spec-item"><span class="spec-label">Focus:</span> Thermogravimetric Analysis,
+                            Activation Energy Modelling</div>
+                        <div class="spec-item"><span class="spec-label">Methodology:</span> Arrhenius Equation,
+                            Multi-rate Pyrolysis Kinetics</div>
+                    </div>
+                    <div class="card-actions">
+                        <a href="https://scholar.google.com" target="_blank" class="card-link"><i
+                                class="fa-solid fa-graduation-cap"></i> Scholar Link</a>
+                        <a href="https://www.researchgate.net" target="_blank" class="card-link secondary"><i
+                                class="fa-solid fa-network-wired"></i> ResearchGate</a>
+                    </div>
+                </div>
+
+                <!-- Paper 4: Video Feature Extraction -->
+                <div class="cyber-card research-card">
+                    <div class="card-glow-bg glow-pink"></div>
+                    <div class="card-header-hud">
+                        <span class="card-tag tag-pink"><i class="fa-solid fa-video"></i> VIDEO ANALYTICS</span>
+                        <span class="card-status-ok"><i class="fa-solid fa-circle-check"></i> ACTIVE RESEARCH</span>
+                    </div>
+                    <h3 class="card-title">Video Feature Extraction via Deep Learning</h3>
+                    <p class="card-excerpt">
+                        Extracting deep spatial-temporal features from multi-frame video segments using advanced 3D CNNs and frame-level sequence models.
+                    </p>
+                    <div class="card-specs">
+                        <div class="spec-item"><span class="spec-label">Domain:</span> Computer Vision / Video Analytics</div>
+                        <div class="spec-item"><span class="spec-label">Focus:</span> Feature Extraction, Frame Sequences, Convolutional Latents</div>
+                        <div class="spec-item"><span class="spec-label">Platform:</span> PyTorch / Jupyter Notebook / OpenCV</div>
+                    </div>
+                    <div class="card-actions">
+                        <a href="https://github.com/SouravGolder/video-feature-extraction" target="_blank"
+                            class="card-link"><i class="fa-brands fa-github"></i> Repository</a>
+                        <a href="https://github.com/SouravGolder/video-feature-extraction" target="_blank" class="card-link secondary"><i
+                                class="fa-solid fa-chart-line"></i> Analytics</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ARCHIVE & PROJECTS SECTION -->
+        <section class="projects-section" id="projects">
+            <div class="section-header">
+                <h2 class="section-title"><span class="title-index">03//</span> SYSTEMS & DEVELOPMENT ARCHIVE</h2>
+                <p class="section-desc">A curated log of systems utilities, NLP models, web applications, and mobile
+                    interfaces.</p>
+            </div>
+
+            <div class="project-grid">
+                <!-- Quora Similarity Model -->
+                <div class="cyber-card project-card">
+                    <div class="card-badge">NLP // SEMANTIC</div>
+                    <h3 class="project-name">Quora Similarity Model</h3>
+                    <p class="project-desc">
+                        Machine learning model that evaluates similarity in question pairs. Employs advanced
+                        tokenization, text normalization, and similarity feature extraction algorithms.
+                    </p>
+                    <div class="project-tech">
+                        <span>Python</span>
+                        <span>NLP</span>
+                        <span>Scikit-Learn</span>
+                        <span>TF-IDF</span>
+                    </div>
+                    <a href="https://github.com/SouravGolder/Quora-similarity-model" target="_blank"
+                        class="project-btn">
+                        <span>EXPLORE REPOSITORY</span> <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Wallet-X Flutter App -->
+                <div class="cyber-card project-card">
+                    <div class="card-badge">MOBILE // FINTECH</div>
+                    <h3 class="project-name">Wallet-X Flutter Clone</h3>
+                    <p class="project-desc">
+                        Interactive and high-fidelity mobile application interface replica of the Wallet-X digital
+                        wallet
+                        system, optimized for performance and fluid UX transitions.
+                    </p>
+                    <div class="project-tech">
+                        <span>Flutter</span>
+                        <span>Dart</span>
+                        <span>Kotlin Components</span>
+                        <span>UI/UX</span>
+                    </div>
+                    <a href="https://github.com/SouravGolder/Bkash-flutter" target="_blank" class="project-btn">
+                        <span>EXPLORE REPOSITORY</span> <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Covid-19 TRMS -->
+                <div class="cyber-card project-card">
+                    <div class="card-badge">FRONTEND // DB</div>
+                    <h3 class="project-name">COVID-19 TRMS</h3>
+                    <p class="project-desc">
+                        A multi-level Tracking and Reporting Management System built to log diagnostic stats, positive
+                        rates, and vaccine scheduling protocols.
+                    </p>
+                    <div class="project-tech">
+                        <span>HTML5</span>
+                        <span>Vanilla CSS</span>
+                        <span>JavaScript</span>
+                        <span>Database</span>
+                    </div>
+                    <a href="https://github.com/SouravGolder/Covid-19-TRMS" target="_blank" class="project-btn">
+                        <span>EXPLORE REPOSITORY</span> <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Mini Cloud Storage Backend -->
+                <div class="cyber-card project-card">
+                    <div class="card-badge">BACKEND // CLOUD</div>
+                    <h3 class="project-name">Mini Cloud Storage Backend</h3>
+                    <p class="project-desc">
+                        A lightweight cloud storage backend system providing secure file uploads, download streams, and directory indexing protocols.
+                    </p>
+                    <div class="project-tech">
+                        <span>Node.js</span>
+                        <span>Express</span>
+                        <span>JavaScript</span>
+                        <span>REST API</span>
+                    </div>
+                    <a href="https://github.com/SouravGolder/mini_cloud_storage_backend" target="_blank"
+                        class="project-btn">
+                        <span>EXPLORE REPOSITORY</span> <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Video Feature Extraction Tool -->
+                <div class="cyber-card project-card">
+                    <div class="card-badge">CV // ML TOOL</div>
+                    <h3 class="project-name">Video Feature Extraction Tool</h3>
+                    <p class="project-desc">
+                        Automated toolkit for extracting high-dimensional motion and spatial-temporal features from video streams for machine learning workflows.
+                    </p>
+                    <div class="project-tech">
+                        <span>Python</span>
+                        <span>OpenCV</span>
+                        <span>Jupyter Notebook</span>
+                        <span>NumPy</span>
+                    </div>
+                    <a href="https://github.com/SouravGolder/video-feature-extraction" target="_blank"
+                        class="project-btn">
+                        <span>EXPLORE REPOSITORY</span> <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- CCTV-AI -->
+                <div class="cyber-card project-card">
+                    <div class="card-badge">AI // SURVEILLANCE</div>
+                    <h3 class="project-name">CCTV-AI</h3>
+                    <p class="project-desc">
+                        Artificial intelligence integration for CCTV systems, executing real-time object detection, anomaly tracking, and automated alert generation.
+                    </p>
+                    <div class="project-tech">
+                        <span>Python</span>
+                        <span>PyTorch</span>
+                        <span>OpenCV</span>
+                        <span>YOLO</span>
+                    </div>
+                    <a href="https://github.com/SouravGolder/CCTV-AI" target="_blank"
+                        class="project-btn">
+                        <span>EXPLORE REPOSITORY</span> <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- CCTV-APK -->
+                <div class="cyber-card project-card">
+                    <div class="card-badge">MOBILE // STREAMING</div>
+                    <h3 class="project-name">CCTV-APK</h3>
+                    <p class="project-desc">
+                        Android application wrapper for CCTV camera management, monitoring, and live-streaming feed orchestration.
+                    </p>
+                    <div class="project-tech">
+                        <span>Android</span>
+                        <span>Java</span>
+                        <span>HTML</span>
+                        <span>WebRTC</span>
+                    </div>
+                    <a href="https://github.com/SouravGolder/CCTV-APK" target="_blank"
+                        class="project-btn">
+                        <span>EXPLORE REPOSITORY</span> <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- WhatsApp Message Service Package -->
+                <div class="cyber-card project-card">
+                    <div class="card-badge">PACKAGE // MESSAGING</div>
+                    <h3 class="project-name">WhatsApp Message Service Package</h3>
+                    <p class="project-desc">
+                        A WhatsApp messaging automation package facilitating scheduled transmissions, message queuing, and programmatic notifications.
+                    </p>
+                    <div class="project-tech">
+                        <span>Node.js</span>
+                        <span>JavaScript</span>
+                        <span>NPM Package</span>
+                        <span>API</span>
+                    </div>
+                    <a href="https://github.com/SouravGolder/whatsapp-message-service-package" target="_blank"
+                        class="project-btn">
+                        <span>EXPLORE REPOSITORY</span> <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CORE DIAGNOSTICS (SKILLS) -->
+        <section class="diagnostics-section" id="skills">
+            <div class="section-header">
+                <h2 class="section-title"><span class="title-index">04//</span> SKILLS DIAGNOSTIC PANELS</h2>
+                <p class="section-desc">Core competencies, computational engines, and developer setups tracked in real
+                    time.</p>
+            </div>
+
+            <div class="diagnostics-container">
+                <div class="diagnostics-panel">
+                    <h3 class="panel-title"><i class="fa-solid fa-brain text-accent"></i> Artificial Intelligence & Data
+                        Science</h3>
+
+                    <div class="metric-container">
+                        <div class="metric-info">
+                            <span class="metric-name">Deep Learning & Neural Networks (PyTorch, Capsule Nets)</span>
+                            <span class="metric-val">90%</span>
+                        </div>
+                        <div class="progress-bar-hud">
+                            <div class="progress-fill-hud" style="width: 90%"></div>
+                        </div>
+                    </div>
+
+                    <div class="metric-container">
+                        <div class="metric-info">
+                            <span class="metric-name">Computer Vision & Remote Sensing (OpenCV, Spatial-Spectral
+                                Maps)</span>
+                            <span class="metric-val">85%</span>
+                        </div>
+                        <div class="progress-bar-hud">
+                            <div class="progress-fill-hud" style="width: 85%"></div>
+                        </div>
+                    </div>
+
+                    <div class="metric-container">
+                        <div class="metric-info">
+                            <span class="metric-name">Natural Language Processing (Scikit-Learn,
+                                Sentiment/Similarity)</span>
+                            <span class="metric-val">80%</span>
+                        </div>
+                        <div class="progress-bar-hud">
+                            <div class="progress-fill-hud" style="width: 80%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="diagnostics-panel">
+                    <h3 class="panel-title"><i class="fa-solid fa-code text-pink"></i> Software & Systems Development
+                    </h3>
+
+                    <div class="metric-container">
+                        <div class="metric-info">
+                            <span class="metric-name">Python Systems & Inference Engine</span>
+                            <span class="metric-val">95%</span>
+                        </div>
+                        <div class="progress-bar-hud warning">
+                            <div class="progress-fill-hud" style="width: 95%"></div>
+                        </div>
+                    </div>
+
+                    <div class="metric-container">
+                        <div class="metric-info">
+                            <span class="metric-name">C++ Low-Level Systems & Utilities</span>
+                            <span class="metric-val">80%</span>
+                        </div>
+                        <div class="progress-bar-hud warning">
+                            <div class="progress-fill-hud" style="width: 80%"></div>
+                        </div>
+                    </div>
+
+                    <div class="metric-container">
+                        <div class="metric-info">
+                            <span class="metric-name">Mobile Frameworks & Native Dev (Flutter, Dart, Kotlin)</span>
+                            <span class="metric-val">75%</span>
+                        </div>
+                        <div class="progress-bar-hud warning">
+                            <div class="progress-fill-hud" style="width: 75%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="environment-grid">
+                <div class="env-item">
+                    <div class="env-icon"><i class="fa-brands fa-linux"></i></div>
+                    <div class="env-info">
+                        <div class="env-title">OS Host Environment</div>
+                        <div class="env-desc">Ubuntu LTS / Linux Kernels</div>
+                    </div>
+                </div>
+                <div class="env-item">
+                    <div class="env-icon"><i class="fa-solid fa-terminal"></i></div>
+                    <div class="env-info">
+                        <div class="env-title">Terminal Shell Setup</div>
+                        <div class="env-desc">Zsh + Oh-My-Zsh + Powerlevel10k</div>
+                    </div>
+                </div>
+                <div class="env-item">
+                    <div class="env-icon"><i class="fa-solid fa-laptop-code"></i></div>
+                    <div class="env-info">
+                        <div class="env-title">Active IDE Core</div>
+                        <div class="env-desc">VS Code / Antigravity Agentic IDE</div>
+                    </div>
+                </div>
+                <div class="env-item">
+                    <div class="env-icon"><i class="fa-solid fa-code-fork"></i></div>
+                    <div class="env-info">
+                        <div class="env-title">Version Control Interface</div>
+                        <div class="env-desc">Git Versioning Engine / GitHub Cloud</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- SYSTEM FOOTER -->
+    <footer class="hud-footer">
+        <div class="footer-left">
+            <span>SECURITY: VERIFIED</span>
+            <span class="divider">|</span>
+            <span>ENCRYPTION: SHIELDED</span>
         </div>
+        <div class="footer-center">
+            <p>© 2026 SOURAV GOLDER. ALL SYSTEMS OPERATIONAL.</p>
+        </div>
+        <div class="footer-right">
+            <span>GRID_COORD: 24.3724° N, 88.6014° E</span>
+        </div>
+    </footer>
 
-    </div>
-</section>
+    <script>
+        // ----------------------------------------------------
+        // 1. NEURAL NETWORK CANVAS BACKGROUND
+        // ----------------------------------------------------
+        const canvas = document.getElementById('neural-canvas');
+        const ctx = canvas.getContext('2d');
 
-<!-- FOOTER -->
-<footer>
-    <p>© 2026 Sourav Golder</p>
-</footer>
+        let particles = [];
+        const particleCount = 70;
+        const connectionDistance = 120;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.8;
+                this.vy = (Math.random() - 0.5) * 0.8;
+                this.radius = Math.random() * 2 + 1;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Bounce or Wrap around
+                if (this.x < 0 || this.x > canvas.width) this.vx = -this.vx;
+                if (this.y < 0 || this.y > canvas.height) this.vy = -this.vy;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(0, 240, 255, 0.6)';
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Update & Draw particles
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+
+            // Draw connection lines
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < connectionDistance) {
+                        const alpha = (1 - dist / connectionDistance) * 0.18;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(0, 240, 255, ${alpha})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            requestAnimationFrame(animateParticles);
+        }
+
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            initParticles();
+        });
+
+        resizeCanvas();
+        initParticles();
+        animateParticles();
+
+
+        // ----------------------------------------------------
+        // 2. HUD REAL-TIME STATS SIMULATOR
+        // ----------------------------------------------------
+        setInterval(() => {
+            const cpuVal = Math.floor(Math.random() * 20) + 15;
+            const tempVal = (35 + Math.random() * 5).toFixed(1);
+            const memVal = Math.floor(Math.random() * 5) + 40;
+
+            document.getElementById('cpu-load').innerText = `${cpuVal}%`;
+            document.getElementById('cpu-temp').innerText = `${tempVal}°C`;
+            document.getElementById('mem-load').innerText = `${memVal}%`;
+        }, 3000);
+
+        function updateClock() {
+            const now = new Date();
+            const str = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
+            document.getElementById('hud-clock').innerText = str;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+
+        // ----------------------------------------------------
+        // 3. INTERACTIVE TERMINAL PROTOCOL LOGIC
+        // ----------------------------------------------------
+        const terminalForm = document.getElementById('terminal-form');
+        const terminalInput = document.getElementById('terminal-input');
+        const terminalOutput = document.getElementById('terminal-output');
+
+        // Prevent focus steal but keep focus on terminal click
+        document.querySelector('.terminal-body').addEventListener('click', () => {
+            terminalInput.focus();
+        });
+
+        const commands = {
+            help: `
+            <div class="terminal-log-output">
+                <span class="text-accent font-bold">AVAILABLE SHELL COMMANDS:</span><br>
+                &nbsp;&nbsp;<span class="text-pink font-bold">about</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Print researcher bio & background.<br>
+                &nbsp;&nbsp;<span class="text-pink font-bold">research</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- List academic publications & active neural net studies.<br>
+                &nbsp;&nbsp;<span class="text-pink font-bold">projects</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Output details of systems utilities, NLP, and UI projects.<br>
+                &nbsp;&nbsp;<span class="text-pink font-bold">skills</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Execute system diagnostics on engineering expertise.<br>
+                &nbsp;&nbsp;<span class="text-pink font-bold">clear</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Wipe the active console display.<br>
+                &nbsp;&nbsp;<span class="text-pink font-bold">sysinfo</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Display kernel state and local hardware parameters.
+            </div>
+        `,
+            about: `
+            <div class="terminal-log-output">
+                <span class="text-accent font-bold">// BIOLOGICAL PROFILE //</span><br>
+                <span class="text-dim">Name:</span> Sourav Golder<br>
+                <span class="text-dim">Status:</span> Computer Science Graduate, RUET (Rajshahi University of Engineering & Technology)<br>
+                <span class="text-dim">Core Focus:</span> Neural network architectures, computer vision, spatial-spectral remote sensing classification, and systems programming.<br>
+                <span class="text-dim">Core Philosophy:</span> Bridging high-dimensional deep learning networks with robust, efficient low-level software engines.
+            </div>
+        `,
+            research: `
+            <div class="terminal-log-output">
+                <span class="text-accent font-bold">// ACTIVE INTELLECTUAL DATABASE: RESEARCH //</span><br>
+                [01] <span class="font-bold">2D-Convolutional Capsule Networks with EM Routing</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Focus: Hyperspectral Image (HSI) Classification, routing vectors, spatial-spectral maps.<br>
+                [02] <span class="font-bold">Hybrid Spatial-Spectral 3D-2D CNN Architectures</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Focus: Optimizing feature extraction layers on spectral cubes.<br>
+                [03] <span class="font-bold">Pyrolysis Kinetics of Biomass (Japanese Larch, Ipil Ipil)</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Focus: Thermogravimetric Arrhenius kinetic models for biofuels.<br>
+                [04] <span class="font-bold">Video Feature Extraction via Deep Learning</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Focus: Deep learning feature extraction, frame-sequence models, and OpenCV latents.
+            </div>
+        `,
+            projects: `
+            <div class="terminal-log-output">
+                <span class="text-accent font-bold">// TARGETS ARCHIVE //</span><br>
+                - <span class="text-pink">Quora-similarity-model:</span> NLP similarity engine.<br>
+                - <span class="text-pink">Bkash-flutter:</span> bKash client layout clone in Flutter/Dart.<br>
+                - <span class="text-pink">Wallet-X:</span> Native Kotlin banking view controller mock.<br>
+                - <span class="text-pink">Covid-19-TRMS:</span> HTML/JS tracking reporting dashboard.<br>
+                - <span class="text-pink">mini_cloud_storage_backend:</span> Node.js/Express cloud storage server interface.<br>
+                - <span class="text-pink">video-feature-extraction-tool:</span> CV/ML motion and spatial-temporal features extractor.<br>
+                - <span class="text-pink">CCTV-AI:</span> Live object detection and surveillance alerting AI.<br>
+                - <span class="text-pink">CCTV-APK:</span> Mobile streaming and feed orchestration Android app.<br>
+                - <span class="text-pink">whatsapp-message-service-package:</span> Automated message scheduler and notifications package.<br>
+                - <span class="text-pink">Eexecution-time-count-cpp:</span> Nano-second precision chrono code profiler in C++.
+            </div>
+        `,
+            skills: `
+            <div class="terminal-log-output">
+                <span class="text-accent font-bold">// DIAGNOSTICS: SYSTEMS MATRIX //</span><br>
+                - <span class="text-dim">Deep Learning:</span> PyTorch, Tensorflow, CNNs, Capsule Nets <span class="text-green">[90%]</span><br>
+                - <span class="text-dim">Computer Vision & NLP:</span> OpenCV, Scikit-Learn, Feature extraction <span class="text-green">[85%]</span><br>
+                - <span class="text-dim">Languages:</span> Python, C++, Kotlin, Dart, SQL <span class="text-green">[90%]</span><br>
+                - <span class="text-dim">Frameworks:</span> Flutter, Git, Zsh Linux Environments <span class="text-green">[80%]</span>
+            </div>
+        `,
+            sysinfo: `
+            <div class="terminal-log-output">
+                <span class="text-accent font-bold">// HARDWARE METRIC BANK //</span><br>
+                - OS Host: Linux x86_64 Ubuntu<br>
+                - Core Shell: Zsh / Powerlevel10k Theme Enabled<br>
+                - Memory Alloc: 16.00 GB virtual RAM<br>
+                - Core Sensors: Temp: 38.6C | CPU Cores: 8 (Thread count: 16)<br>
+                - Active Latency: 12ms to RUET local node
+            </div>
+        `
+        };
+
+        function processCommand(cmdText) {
+            const cleanCmd = cmdText.trim().toLowerCase();
+
+            // Echo command typed
+            const echoLine = document.createElement('div');
+            echoLine.className = 'log-line';
+            echoLine.innerHTML = `<span class="terminal-prompt">sourav@golder-os:~$</span> <span class="text-white">${cmdText}</span>`;
+            terminalOutput.appendChild(echoLine);
+
+            if (cleanCmd === 'clear') {
+                terminalOutput.innerHTML = '';
+            } else if (cleanCmd === '') {
+                // Do nothing
+            } else if (commands[cleanCmd]) {
+                const respLine = document.createElement('div');
+                respLine.innerHTML = commands[cleanCmd];
+                terminalOutput.appendChild(respLine);
+            } else {
+                const errLine = document.createElement('div');
+                errLine.className = 'log-line text-warn';
+                errLine.innerHTML = `Command not recognized: "${cleanCmd}". Type <span class="font-bold">help</span> to scan available operations.`;
+                terminalOutput.appendChild(errLine);
+            }
+
+            // Scroll terminal to bottom
+            const body = document.querySelector('.terminal-body');
+            body.scrollTop = body.scrollHeight;
+        }
+
+        terminalForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const text = terminalInput.value;
+            terminalInput.value = '';
+            processCommand(text);
+        });
+
+        // Hook Macro click handlers
+        document.querySelectorAll('.macro-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const cmd = btn.getAttribute('data-cmd');
+                if (cmd === 'clear') {
+                    processCommand('clear');
+                } else {
+                    // Autotype effect stimulation
+                    terminalInput.value = '';
+                    let index = 0;
+                    btn.blur();
+                    const interval = setInterval(() => {
+                        if (index < cmd.length) {
+                            terminalInput.value += cmd[index];
+                            index++;
+                        } else {
+                            clearInterval(interval);
+                            setTimeout(() => {
+                                terminalInput.value = '';
+                                processCommand(cmd);
+                            }, 150);
+                        }
+                    }, 40);
+                }
+            });
+        });
+    </script>
 
 </body>
+
 </html>
