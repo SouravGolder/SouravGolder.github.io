@@ -30,22 +30,22 @@
     <!-- HUD STATUS HEADER -->
     <header class="hud-header">
         <div class="hud-logo">
-            <span class="hud-brand">GOLDER_OS</span>
-            <span class="hud-version">v1.2.0</span>
+            <span class="hud-brand">Profile Viewed</span>
+            <span class="hud-version" id="view-counter"><i class="fa-solid fa-spinner fa-spin"></i></span>
         </div>
-        <div class="hud-stats-group">
-            <div class="hud-stat"><i class="fa-solid fa-microchip text-accent"></i> CPU: <span id="cpu-load">24%</span>
-            </div>
-            <div class="hud-stat"><i class="fa-solid fa-temperature-half text-warn"></i> TEMP: <span
-                    id="cpu-temp">38.6°C</span></div>
-            <div class="hud-stat"><i class="fa-solid fa-server text-accent"></i> MEM: <span id="mem-load">42%</span>
-            </div>
-            <div class="hud-stat"><i class="fa-solid fa-wifi text-green"></i> NET: <span
-                    class="status-dot blinking"></span> ONLINE</div>
+        <div class="hud-stats-group system-stats">
+            <div class="hud-stat"><i class="fa-solid fa-gauge-simple-high text-accent"></i> LATENCY: <span
+                    id="node-ping">00ms</span></div>
+            <div class="hud-stat"><i class="fa-solid fa-wifi text-green"></i> BANDWIDTH: <span id="node-mbps">0.0
+                    Mbps</span></div>
+            <div class="hud-stat"><i class="fa-solid fa-battery-three-quarters text-warn"></i> BATTERY: <span
+                    id="node-battery">100% [AC]</span></div>
         </div>
-        <div class="hud-time-group">
-            <span id="hud-coordinates">LOC: 24.37°N 88.60°E</span> <!-- RUET, Rajshahi Coordinates -->
-            <span id="hud-clock">00:00:00 UTC</span>
+        <div class="hud-time-group spatial-stats">
+            <div class="hud-stat"><i class="fa-solid fa-location-dot text-accent"></i> LOC: <span
+                    id="node-location">DETECTING NODE...</span></div>
+            <div class="hud-stat"><i class="fa-solid fa-clock text-green"></i> TIME: <span id="node-time">00:00:00
+                    UTC</span></div>
         </div>
     </header>
 
@@ -85,9 +85,12 @@
                 <div class="social-links">
                     <a href="https://github.com/SouravGolder" target="_blank" title="GitHub Profile"><i
                             class="fa-brands fa-github"></i></a>
-                    <a href="https://scholar.google.com" target="_blank" title="Google Scholar"><i
-                            class="fa-solid fa-graduation-cap"></i></a>
-                    <a href="mailto:souravgolder@gmail.com" title="Email Node"><i class="fa-solid fa-envelope"></i></a>
+                    <a href="https://scholar.google.com/citations?hl=en&user=8864XVoAAAAJ" target="_blank"
+                        title="Google Scholar"><i class="fa-solid fa-graduation-cap"></i></a>
+                    <a href="https://www.linkedin.com/in/sourav-golder-18375a17b/" target="_blank" title="Linkedin"><i
+                            class="fa-brands fa-linkedin"></i></a>
+                    <a href="mailto:golder.sourav16@gmail.com" title="Email Node"><i
+                            class="fa-solid fa-envelope"></i></a>
                 </div>
             </div>
         </section>
@@ -175,14 +178,14 @@
                         </div>
                         <div class="spec-item"><span class="spec-label">Focus:</span> Spectral-Spatial Capsules, Routing
                             Mechanisms</div>
-                        <div class="spec-item"><span class="spec-label">Institution:</span> Rajshahi University of
-                            Engineering & Technology (RUET)</div>
+                        <div class="spec-item"><span class="spec-label">Methodology:</span> 2D-Convolutional Capsules Network with
+                            Expectation-Maximization Routing algorithm</div>
                     </div>
                     <div class="card-actions">
                         <a href="https://github.com/SouravGolder/Hyperspectral-Image-Classification" target="_blank"
                             class="card-link"><i class="fa-brands fa-github"></i> Repository</a>
                         <a href="https://ieeexplore.ieee.org/document/11172056" target="_blank"
-                            class="card-link secondary"><i class="fa-solid fa-file-pdf"></i> Read Paper</a>
+                            class="card-link secondary"><i class="fa-solid fa-book"></i> DOI</a>
                     </div>
                 </div>
 
@@ -221,7 +224,7 @@
                     <div class="card-header-hud">
                         <span class="card-tag tag-green"><i class="fa-solid fa-fire-flame-curved"></i> BIO-ENERGY
                             MODELLING</span>
-                        <span class="card-status-ok"><i class="fa-solid fa-circle-check"></i> CO-AUTHORED</span>
+                        <span class="card-status-ok"><i class="fa-solid fa-circle-check"></i> PUBLISHED</span>
                     </div>
                     <h3 class="card-title">Pyrolysis Kinetics & Biofuel Production Potential of Woody Biomass</h3>
                     <p class="card-excerpt">
@@ -241,8 +244,8 @@
                             target="_blank" class="card-link"><i class="fa-solid fa-graduation-cap"></i> Scholar
                             Link</a>
                         <a href="https://www.researchgate.net/publication/358800117_Comparative_Study_of_Thermal_Degradation_Kinetics_of_Two_Woody_Biomass_Samples_for_Bio-Oil_Production"
-                            target="_blank" class="card-link secondary"><i class="fa-solid fa-network-wired"></i>
-                            ResearchGate</a>
+                            target="_blank" class="card-link secondary"><i class="fa-solid fa-book"></i>
+                            DOI</a>
                     </div>
                 </div>
 
@@ -779,25 +782,121 @@
 
 
         // ----------------------------------------------------
-        // 2. HUD REAL-TIME STATS SIMULATOR
+        // 2. HUD REAL-TIME STATS TELEMETRY
         // ----------------------------------------------------
-        setInterval(() => {
-            const cpuVal = Math.floor(Math.random() * 20) + 15;
-            const tempVal = (35 + Math.random() * 5).toFixed(1);
-            const memVal = Math.floor(Math.random() * 5) + 40;
-
-            document.getElementById('cpu-load').innerText = `${cpuVal}%`;
-            document.getElementById('cpu-temp').innerText = `${tempVal}°C`;
-            document.getElementById('mem-load').innerText = `${memVal}%`;
-        }, 3000);
+        // SPACE-TIME TELEMETRY (Location & Dynamic Clock)
+        let systemTimeZone = "UTC"; // Default baseline
 
         function updateClock() {
-            const now = new Date();
-            const str = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
-            document.getElementById('hud-clock').innerText = str;
+            const options = {
+                timeZone: systemTimeZone,
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            };
+            const formatter = new Intl.DateTimeFormat('en-US', options);
+            document.getElementById('node-time').innerText = `${formatter.format(new Date())} ${systemTimeZone}`;
         }
+        // Keep clock ticking seamlessly every second
         setInterval(updateClock, 1000);
         updateClock();
+
+        // Fetch visitor's Location data via IP geolocation
+        fetch('https://ipapi.co/json/')
+            .then(response => response.json())
+            .then(data => {
+                if (!data.error && data.city && data.country_code) {
+                    document.getElementById('node-location').innerText = `${data.city.toUpperCase()} // ${data.country_code}`;
+                    if (data.timezone) {
+                        systemTimeZone = data.timezone;
+                        updateClock();
+                    }
+                } else {
+                    // API returned error (rate-limited, etc.) — try fallback
+                    throw new Error('ipapi error');
+                }
+            })
+            .catch(() => {
+                // Fallback: ip-api.com (free, supports CORS, HTTP)
+                fetch('http://ip-api.com/json/?fields=city,countryCode,timezone')
+                    .then(r => r.json())
+                    .then(fb => {
+                        if (fb.city && fb.countryCode) {
+                            document.getElementById('node-location').innerText = `${fb.city.toUpperCase()} // ${fb.countryCode}`;
+                            if (fb.timezone) {
+                                systemTimeZone = fb.timezone;
+                                updateClock();
+                            }
+                        } else {
+                            document.getElementById('node-location').innerText = "NODE_ANONYMOUS";
+                        }
+                    })
+                    .catch(() => {
+                        document.getElementById('node-location').innerText = "NODE_ANONYMOUS";
+                    });
+            });
+
+
+        // NETWORK TELEMETRY (Latency & Mbps Bandwidth)
+        function measureNetwork() {
+            const startTime = performance.now();
+
+            // Ping a real network endpoint to measure transit latency
+            // On file:// protocol, window.location.href reads a local file (0ms = incorrect)
+            // Always ping a real remote server instead
+            fetch('https://cloudflare.com/cdn-cgi/trace', { mode: 'no-cors', cache: 'no-store' })
+                .then(() => {
+                    const latency = Math.round(performance.now() - startTime);
+                    document.getElementById('node-ping').innerText = `${latency}ms`;
+                })
+                .catch(() => {
+                    document.getElementById('node-ping').innerText = "N/A";
+                });
+
+            // Extract browser-estimated ambient downlink bandwidth capabilities
+            if (navigator.connection && navigator.connection.downlink) {
+                const mbps = navigator.connection.downlink;
+                document.getElementById('node-mbps').innerText = `${mbps.toFixed(1)} Mbps`;
+            } else {
+                document.getElementById('node-mbps').innerText = "N/A Mbps";
+            }
+        }
+        // Check connection states immediately, then cycle updates every 10 seconds
+        measureNetwork();
+        setInterval(measureNetwork, 10000);
+
+
+        // DEVICE TELEMETRY (Battery Array Monitor)
+        if (navigator.getBattery) {
+            navigator.getBattery().then(battery => {
+                function processBatteryStats() {
+                    const chargeCapacity = Math.round(battery.level * 100);
+                    const condition = battery.charging ? "AC" : "DC";
+                    document.getElementById('node-battery').innerText = `${chargeCapacity}% [${condition}]`;
+                }
+                processBatteryStats();
+                battery.addEventListener('levelchange', processBatteryStats);
+                battery.addEventListener('chargingchange', processBatteryStats);
+            });
+        } else {
+            document.getElementById('node-battery').innerText = "UNSUPPORTED";
+        }
+
+
+        // PROFILE VIEW COUNTER
+        fetch('https://api.counterapi.dev/v1/souravgolder-portfolio/views/up')
+            .then(r => r.json())
+            .then(data => {
+                if (data.count !== undefined) {
+                    document.getElementById('view-counter').innerText = data.count;
+                } else {
+                    document.getElementById('view-counter').innerText = '—';
+                }
+            })
+            .catch(() => {
+                document.getElementById('view-counter').innerText = '—';
+            });
 
 
         // ----------------------------------------------------
