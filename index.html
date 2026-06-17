@@ -178,7 +178,8 @@
                         </div>
                         <div class="spec-item"><span class="spec-label">Focus:</span> Spectral-Spatial Capsules, Routing
                             Mechanisms</div>
-                        <div class="spec-item"><span class="spec-label">Methodology:</span> 2D-Convolutional Capsules Network with
+                        <div class="spec-item"><span class="spec-label">Methodology:</span> 2D-Convolutional Capsules
+                            Network with
                             Expectation-Maximization Routing algorithm</div>
                     </div>
                     <div class="card-actions">
@@ -839,9 +840,8 @@
 
 
         // NETWORK TELEMETRY (Latency & Mbps Bandwidth)
-        function measureNetwork() {
+        function measureLatency() {
             const startTime = performance.now();
-
             // Ping a real network endpoint to measure transit latency
             // On file:// protocol, window.location.href reads a local file (0ms = incorrect)
             // Always ping a real remote server instead
@@ -853,18 +853,52 @@
                 .catch(() => {
                     document.getElementById('node-ping').innerText = "N/A";
                 });
-
-            // Extract browser-estimated ambient downlink bandwidth capabilities
-            if (navigator.connection && navigator.connection.downlink) {
-                const mbps = navigator.connection.downlink;
-                document.getElementById('node-mbps').innerText = `${mbps.toFixed(1)} Mbps`;
-            } else {
-                document.getElementById('node-mbps').innerText = "N/A Mbps";
-            }
         }
-        // Check connection states immediately, then cycle updates every 10 seconds
-        measureNetwork();
-        setInterval(measureNetwork, 10000);
+
+        function measureBandwidth() {
+            // If on file:// origin, fetch is blocked by CORS. Fall back to navigator.connection
+            if (window.location.protocol === 'file:') {
+                if (navigator.connection && navigator.connection.downlink) {
+                    document.getElementById('node-mbps').innerText = `${navigator.connection.downlink.toFixed(1)} Mbps`;
+                } else {
+                    document.getElementById('node-mbps').innerText = "N/A Mbps";
+                }
+                return;
+            }
+
+            const startTime = performance.now();
+            const sizeInBytes = 66416; // Exact size of github_master_guide.pdf
+
+            fetch(`./github_master_guide.pdf?t=${Date.now()}`, { cache: 'no-store' })
+                .then(response => {
+                    if (!response.ok) throw new Error('Fetch failed');
+                    return response.arrayBuffer();
+                })
+                .then(() => {
+                    const duration = (performance.now() - startTime) / 1000; // seconds
+                    if (duration > 0) {
+                        const bitsLoaded = sizeInBytes * 8;
+                        const speedMbps = (bitsLoaded / duration) / 1000000;
+                        document.getElementById('node-mbps').innerText = `${speedMbps.toFixed(1)} Mbps`;
+                    }
+                })
+                .catch(() => {
+                    if (navigator.connection && navigator.connection.downlink) {
+                        document.getElementById('node-mbps').innerText = `${navigator.connection.downlink.toFixed(1)} Mbps`;
+                    } else {
+                        document.getElementById('node-mbps').innerText = "N/A Mbps";
+                    }
+                });
+        }
+
+        // Initialize and schedule telemetry cycles
+        measureLatency();
+        measureBandwidth();
+
+        // Latency updates continuously (every 800ms)
+        setInterval(measureLatency, 800);
+        // Bandwidth is measured every 15 seconds to prevent excessive data usage
+        setInterval(measureBandwidth, 5000);
 
 
         // DEVICE TELEMETRY (Battery Array Monitor)
