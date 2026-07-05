@@ -803,53 +803,40 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // Fetch visitor's Location data via IP geolocation with multiple fallback APIs
-        function fetchLocation() {
-            // Primary API: ip-api.com (free, reliable, city-level accuracy)
-            fetch('http://ip-api.com/json/?fields=status,message,continent,countryCode,region,city,zip,lat,lon,timezone,isp,org,as,query')
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === 'success' && data.city && data.countryCode) {
-                        document.getElementById('node-location').innerText = `${data.city.toUpperCase()} // ${data.countryCode}`;
-                        if (data.timezone) {
-                            systemTimeZone = data.timezone;
-                            updateClock();
-                        }
-                        console.log('Location detected:', data.city, data.countryCode, data.timezone);
-                    } else {
-                        throw new Error('ip-api.com returned invalid data');
+        // Fetch visitor's Location data via IP geolocation
+        fetch('https://ipapi.co/json/')
+            .then(response => response.json())
+            .then(data => {
+                if (!data.error && data.city && data.country_code) {
+                    document.getElementById('node-location').innerText = `${data.city.toUpperCase()} // ${data.country_code}`;
+                    if (data.timezone) {
+                        systemTimeZone = data.timezone;
+                        updateClock();
                     }
-                })
-                .catch(() => {
-                    // Fallback API: ipapi.co (may require different handling)
-                    fetch('https://ipapi.co/json/')
-                        .then(response => {
-                            // Check if response is JSON or HTML
-                            const contentType = response.headers.get('content-type');
-                            if (contentType && contentType.includes('application/json')) {
-                                return response.json();
-                            } else {
-                                throw new Error('ipapi.co returned HTML instead of JSON');
+                } else {
+                    // API returned error (rate-limited, etc.) — try fallback
+                    throw new Error('ipapi error');
+                }
+            })
+            .catch(() => {
+                // Fallback: ip-api.com (free, supports CORS, HTTP)
+                fetch('http://ip-api.com/json/?fields=city,countryCode,timezone')
+                    .then(r => r.json())
+                    .then(fb => {
+                        if (fb.city && fb.countryCode) {
+                            document.getElementById('node-location').innerText = `${fb.city.toUpperCase()} // ${fb.countryCode}`;
+                            if (fb.timezone) {
+                                systemTimeZone = fb.timezone;
+                                updateClock();
                             }
-                        })
-                        .then(data => {
-                            if (!data.error && data.city && data.country_code) {
-                                document.getElementById('node-location').innerText = `${data.city.toUpperCase()} // ${data.country_code}`;
-                                if (data.timezone) {
-                                    systemTimeZone = data.timezone;
-                                    updateClock();
-                                }
-                            } else {
-                                throw new Error('ipapi.co returned invalid data');
-                            }
-                        })
-                        .catch(() => {
+                        } else {
                             document.getElementById('node-location').innerText = "NODE_ANONYMOUS";
-                        });
-                });
-        }
-        
-        fetchLocation();
+                        }
+                    })
+                    .catch(() => {
+                        document.getElementById('node-location').innerText = "NODE_ANONYMOUS";
+                    });
+            });
 
 
         // NETWORK TELEMETRY (Latency & Mbps Bandwidth)
